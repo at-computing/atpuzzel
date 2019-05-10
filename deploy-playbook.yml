@@ -1,0 +1,34 @@
+#! ansible-playbook --ask-vault-pass
+---
+- name: build and run at-puzzel container on localhost
+  hosts: localhost
+  connection: local
+  gather_facts: no
+  tasks:
+  - name: Build image
+    docker_image:
+      path: .
+      name: at-puzzel
+      # push: yes
+
+  -
+  - name: run container
+    docker_container:
+      name: at-puzzel
+      image: at-puzzel
+      published_ports:
+        - 80:80
+
+  - name: set password.txt
+    shell: docker exec at-puzzel sh -c "echo {{password|quote}}> /var/www/passwords.txt"
+    vars:
+    # ansible vault password is pin123
+    - password: !vault |
+          $ANSIBLE_VAULT;1.1;AES256
+          32663938346634373061666364633638656331393236313939646337663661353733633135623230
+          3365643230303530316133313861376131303861323236380a663161653666643162303634336635
+          63623135376136356137613565373934346663353436313035333765636231303166353932653034
+          3732353964393662620a393736366261356238316635393236393939663266306136346562333235
+          6362
+
+
