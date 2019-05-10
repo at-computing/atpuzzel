@@ -78,7 +78,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
   <!-- hier is alvast het eerste van totaal zeven wachtwoorden: Bootstrap_Rulez
   Dit wachtwoord was natuurlijk wel erg makkelijk te vinden. Dus, hup! Zoeken naar die andere zes....
-  versie 0.13
+  versie 0.14
   -->
   </body>
 </html>
